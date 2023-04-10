@@ -1,0 +1,29 @@
+# Versión de docker compose que se usará
+version: '3'
+services:
+  # Nombre del servicio
+  db:
+    # Nombre del contenedor
+    container_name: postgres_database
+    # Nombre de la imagen a usar
+    image: postgres:15.1
+    # Volúmenes
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    # Variables de entorno
+    environment:
+      - POSTGRES_PASSWORD=123456
+  # Nombre de otro servicio
+  pgAdmin:
+    # Este servicio pgAdmin, depende de otro servicio, o sea del db
+    depends_on:
+      - db
+    # Nombre de la imagen a usar
+    image: dpage/pgadmin4:6.17
+    # Puertos: MI_EQUIPO : CONTENEDOR
+    ports:
+      - "8080:80"
+      # Variables de entorno
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=123456
+      - PGADMIN_DEFAULT_EMAIL=superman@google.com
