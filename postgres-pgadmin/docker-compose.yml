@@ -1,5 +1,6 @@
 # Versión de docker compose que se usará
 version: '3'
+
 services:
   # Nombre del servicio
   db:
@@ -13,6 +14,7 @@ services:
     # Variables de entorno
     environment:
       - POSTGRES_PASSWORD=123456
+
   # Nombre de otro servicio
   pgAdmin:
     # Este servicio pgAdmin, depende de otro servicio, o sea del db
@@ -27,3 +29,8 @@ services:
     environment:
       - PGADMIN_DEFAULT_PASSWORD=123456
       - PGADMIN_DEFAULT_EMAIL=superman@google.com
+
+# Definiendo el volumen que está siendo usado en el servicio db
+volumes:
+  # Crea el volumen
+  postgres-db:
