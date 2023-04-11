@@ -10,6 +10,7 @@ services:
     image: postgres:15.1
     # Volúmenes
     volumes:
+        # postgres-db, recordar que es el volumen que creamos en nuestra pc local
       - postgres-db:/var/lib/postgresql/data
     # Variables de entorno
     environment:
@@ -34,3 +35,4 @@ services:
 volumes:
   # Crea el volumen
   postgres-db:
+    external: true
