@@ -35,4 +35,6 @@ services:
 volumes:
   # Crea el volumen
   postgres-db:
+    # external: true, buscará en el ambiente externo de los contendores un volumen existente llamado postgres-db
+    # external: false, si ejecutamos el arhivo mediante el docker compose up, creará el volumen externo: volume_externo_postgres-db (nombre-del-directorio_nombre-del-volumen)
     external: true
