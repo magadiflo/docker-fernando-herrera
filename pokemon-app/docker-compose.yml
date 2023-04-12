@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container_name: pokemon_db
+    container_name: ${MONGO_DB_NAME}
     image: mongo:6.0
     volumes:
       - poke-vol:/data/db
@@ -10,7 +10,13 @@ services:
       - 27017:27017
     # Reiniciar el contenedor si se detiene
     restart: always
-
+    environment:
+      # Esto se ejecuta cuando se inicializa la BD, pero la BD ya la iniciamos en un commit anterior
+      # Entonces, lo que haremos será eliminar el volumen externo que tengamos para poder volver a crear todo desde este archivo
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    # Le decimos que después que se cree el contenedor que se ejecute el siguiente comando
+    command: ['--auth']
 volumes:
   poke-vol:
     external: false
