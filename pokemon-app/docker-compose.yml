@@ -6,8 +6,16 @@ services:
     image: mongo:6.0
     volumes:
       - poke-vol:/data/db
-    ports:
-      - 27017:27017
+
+    # Exponiendo el puerto de la BD, damos oportunidad para que a través de una aplicación como Studio 3T Free podamos conectarnos.
+    # Pero en este caso, vemos que nuesto servicio que usa la imagen de mongo-express, es un aplicativo web a través del cual nosotros
+    # nos conectaremos y este mismo aplicativo se conectará a nuestra base de datos, quien de manera interna usará las credenciales y el nombre
+    # del servidor, que en este caso sería el nombre del contenedor que tiene nuestra BD.
+    # Por lo tanto, para evitar que nos conectemos desde afuera a através de algúna aplicación como Studio 3T a nuestra BD, comentaremos esos
+    # atributos, ya que como se explicó, usaremos para poder conectarnos a mongo-express a través de un navegador web: http://localhost:8080
+    #ports:
+    # - 27017:27017
+
     # Reiniciar el contenedor si se detiene
     restart: always
     environment:
@@ -16,7 +24,20 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     # Le decimos que después que se cree el contenedor que se ejecute el siguiente comando
-    command: ['--auth']
+    command: [ '--auth' ]
+
+  mongo-express:
+    depends_on:
+      - db
+    image: mongo-express:1.0.0-alpha.4
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: ${MONGO_DB_NAME}
+    ports:
+      - 8080:8081
+    restart: always
+
 volumes:
   poke-vol:
     external: false
