@@ -38,6 +38,23 @@ services:
       - 8080:8081
     restart: always
 
+  poke-app:
+    depends_on:
+      - db
+      - mongo-express
+    image: klerith/pokemon-nest-app:1.0.0
+    ports:
+      - 3000:3000
+    environment:
+      # MONGODB: Conexión a la bd de mongo: mongodb://strider:123456789@localhost:27017, lo usaremos con variables de entorno.
+      # En el ejemplo de conexión dice localhost, eso significaría que busque en este contenedor la BD. Recordemos
+      # que nuestra BD está en otro contenedor, por lo tanto en reemplazo de localhost colocamos el nombre del contenedor
+      # donde está la BD ${MONGO_DB_NAME} y como por defecto docker añade a todos los contenedores de este docker-compose.yml a
+      # una misma red, es que la conexión entre estos contendores funcionará.
+      MONGODB: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_DB_NAME}:27017
+      DB_NAME: ${MONGO_DB_NAME}
+    restart: always
+
 volumes:
   poke-vol:
     external: false
