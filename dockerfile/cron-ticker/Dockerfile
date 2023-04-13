@@ -14,3 +14,12 @@ WORKDIR /app
 # eso significa que los dos archivos se copiarán en el WORKDIR definido (/app). 
 # Es decir, el ./ definido aquí abajo es nuestro /app
 COPY app.js package.json ./
+
+# Instalamos las dependencias que requiere nuestro proyecto. 
+# El RUN es como ejecutáramos mediante el cmd la instrucción que le sigue: npm install
+RUN npm install
+
+# Este comando se ejecutará CUANDO SE ARRANQUE UN CONTENEDOR.
+# Con este comando CMD le decimos a la imagen de docker, luego de que se empiece a correr un
+# contenedor de esta imagen, ejecutarás este comando para iniciar la aplicación.
+CMD ["node", "app.js"]
