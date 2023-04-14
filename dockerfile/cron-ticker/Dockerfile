@@ -21,7 +21,16 @@ COPY package.json ./
 # El RUN es como ejecutáramos mediante el cmd la instrucción que le sigue: npm install
 RUN npm install
 
-COPY app.js ./
+#COPY app.js ./
+
+# Como agregamos más directorios y archivos le diremos que copie todo lo que hay en el directorio raíz (/cron-ticker)
+# y lo pegue en el WORKDIR de nuestra imagen. Eso por su puesto, cuando decimos todo, copiará todo, incluyendo
+# el /node_modules, eso sería un problema ya que no queremos que eso lo copie, pero bueno, por ahora soluciona el problema
+# que tenemos, el que necesitemos que los directorios nuevos creados sean copiados a la imagen para que pase el Testing
+COPY . .
+
+# Realizar testing
+RUN npm run test
 
 # Este comando se ejecutará CUANDO SE ARRANQUE UN CONTENEDOR.
 # Con este comando CMD le decimos a la imagen de docker, luego de que se empiece a correr un
