@@ -24,9 +24,9 @@ RUN npm install
 #COPY app.js ./
 
 # Como agregamos más directorios y archivos le diremos que copie todo lo que hay en el directorio raíz (/cron-ticker)
-# y lo pegue en el WORKDIR de nuestra imagen. Eso por su puesto, cuando decimos todo, copiará todo, incluyendo
-# el /node_modules, eso sería un problema ya que no queremos que eso lo copie, pero bueno, por ahora soluciona el problema
-# que tenemos, el que necesitemos que los directorios nuevos creados sean copiados a la imagen para que pase el Testing
+# y lo pegue en el WORKDIR de nuestra imagen. Ahora, anteriormente, copiaba también el directorio node_modules, 
+# el archivo Dockerfile, pero ahora le agregamos el .dockerignore y dentro de él definimos qué archivos y directorios 
+# no queremos que copie (node_modules/, Dockerfile, .dockerignore, etc.). Este comportamiendo es similar al .gitignore
 COPY . .
 
 # Realizar testing
