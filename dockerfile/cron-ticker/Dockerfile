@@ -32,6 +32,16 @@ COPY . .
 # Realizar testing
 RUN npm run test
 
+# Eliminar archivos y directorios no necesarios en producción
+# rm: remove, -r: elimina de manera recursiva, f: forzado
+# Esta forma separada de hacer la eliminación es similar a si lo colocáramos en una línea concatenándolos con && 
+# RUN rm -rf tests
+# RUN rm -rf node_modules
+RUN rm -rf tests && rm -rf node_modules
+
+# Instalamos sólo las dependencias de producción
+RUN npm install --prod
+
 # Este comando se ejecutará CUANDO SE ARRANQUE UN CONTENEDOR.
 # Con este comando CMD le decimos a la imagen de docker, luego de que se empiece a correr un
 # contenedor de esta imagen, ejecutarás este comando para iniciar la aplicación.
