@@ -4,6 +4,9 @@
 # Esta versión de Linux (alpine) viene con varias carpetas /usr, /lib, etc. aunque hay
 # una carpeta interna que nos interesa, el /app, el cual lo usaremos
 # para alojar nuestra aplicación, aunque también podríamos crear nuestro propio directorio
+# -----
+# --platform=linux/amd64, especificamos la plataforma en la que se construirá la imagen
+# FROM --platform=linux/amd64 node:19.2-alpine3.16
 FROM node:19.2-alpine3.16
 
 # Es como si nos estuviéramos moviendo haciendo un cd a la carpeta /app
