@@ -10,7 +10,8 @@
 # FROM node:19.2-alpine3.16
 # -----
 # El $BUILDPLATFORM, es una variable de entorno que están disponibles dentro del Dockerfile
-FROM --platform=$BUILDPLATFORM node:19.2-alpine3.16
+# FROM --platform=$BUILDPLATFORM node:19.2-alpine3.16
+FROM node:19.2-alpine3.16
 
 # Es como si nos estuviéramos moviendo haciendo un cd a la carpeta /app
 WORKDIR /app
