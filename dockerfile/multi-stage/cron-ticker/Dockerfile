@@ -15,8 +15,8 @@ RUN npm install
 #############################################################################
 FROM node:19.2-alpine3.16 AS builder
 WORKDIR /app
-# --from=desp, le decimos que el origen de donde copiará está en la imagen o el stage con alias deps
-# /app/node_modules, dentro de dicho stage (deps) se vaya al directorio /app/node_modules para copiar
+# --from=desp, le decimos que el origen de donde copiará está en la imagen o el stage con alias deps.
+# /app/node_modules, dentro de dicho stage (deps) se vaya al directorio /app/node_modules para copiar.
 # ./node_modules, el destino donde copiará los archivos será en el workdir de este nuevo stage directorio de node_modules.
 COPY --from=deps /app/node_modules ./node_modules
 # Copiar todo lo que está en el host (local) (recordar los archivos ignorados en .dockerignore) y pegarlos en el 
