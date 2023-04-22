@@ -19,6 +19,11 @@ RUN yarn build
 FROM nginx:1.23.3 AS prod
 EXPOSE 80
 COPY --from=builder /app/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+# nginx/nginx.conf, correponde al archivo en nuestra pc local /nginx/nginx.conf
+# /etc/nginx/conf.d, corresponde al directorio en la imagen del servidor nginx 
+# donde pegará el archivo nginx.conf que copiaremos
+COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # Con este comando corrempos nuestra aplicación en nginx
 CMD [ "nginx","-g", "daemon off;"]
