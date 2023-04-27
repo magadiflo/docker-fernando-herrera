@@ -4,7 +4,9 @@ metadata:
   name: pg-admin-secrets
 type: Opaque
 data:
-  # superman@google.com = (base64) c3VwZXJtYW5AZ29vZ2xlLmNvbSANCg==
-  # clave-secreta-12345 = (base64) Y2xhdmUtc2VjcmV0YS0xMjM0NQ==
-  PG_USER_EMAIL: c3VwZXJtYW5AZ29vZ2xlLmNvbSANCg==
-  DB_PASSWORD: Y2xhdmUtc2VjcmV0YS0xMjM0NQ==
+  # Base64 String:  superman@google.com
+  # echo -n postgres | base64
+  PG_USER_EMAIL: c3VwZXJtYW5AZ29vZ2xlLmNvbQ==
+
+  # EstoEsUnPassWordSecreto
+  DB_PASSWORD: RXN0b0VzVW5QYXNzV29yZFNlY3JldG8=

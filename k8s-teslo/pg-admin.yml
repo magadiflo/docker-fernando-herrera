@@ -31,7 +31,7 @@ spec:
               name: pg-admin-secrets
               key: PG_USER_EMAIL
         - name: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
-          value: "false"
+          value: "False"
 ---
 apiVersion: v1
 kind: Service
@@ -44,6 +44,6 @@ spec:
     app: pg-admin
   ports:
     - protocol: TCP
-      port: 80 # Cualquier puerto
-      targetPort: 80 # Permitirá conectarse con el puerto definido en el containerPort del deployment
+      port: 80 # cualquier puerto
+      targetPort: 80
       nodePort: 30200
